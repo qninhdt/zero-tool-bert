@@ -1,0 +1,3 @@
+_target_: src.models.miniagent_module.MiniAgentModule
+
+bert_model: bert-base-uncased

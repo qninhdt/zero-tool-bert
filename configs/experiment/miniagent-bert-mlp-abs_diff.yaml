@@ -1,0 +1,37 @@
+# @package _global_
+
+defaults:
+  - override /data: mixed
+  - override /model: miniagent
+  - override /callbacks: default
+  - override /trainer: gpu
+
+seed: 42
+
+model:
+  lr: 0.0001
+  bert_model: bert-base-uncased
+
+  inst_proj_model:
+    _target_: src.models.mlp_module.MLPProjection
+    input_dim: 768
+    hidden_dim: 768
+    output_dim: 768
+
+  tool_proj_model:
+    _target_: src.models.mlp_module.MLPProjection
+    input_dim: 768
+    hidden_dim: 768
+    output_dim: 768
+
+  pred_model:
+    _target_: src.models.mlp_module.MLPPrediction
+    input_dim: 768
+    use_abs_diff: true
+    use_mult: true
+
+data:
+  bert_model: bert-base-uncased
+  seed: 42
+  batch_size: 64
+  tool_capacity: 16

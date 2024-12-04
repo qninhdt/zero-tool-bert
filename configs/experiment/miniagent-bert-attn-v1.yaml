@@ -1,0 +1,36 @@
+# @package _global_
+
+defaults:
+  - override /data: mixed
+  - override /model: miniagent
+  - override /callbacks: default
+  - override /trainer: gpu
+
+seed: 42
+
+model:
+  lr: 0.0001
+  bert_model: bert-base-uncased
+
+  inst_proj_model:
+    _target_: src.models.attn_v1_module.AttnProjection
+    input_dim: 768
+    n_heads: 4
+    output_length: 16
+
+  tool_proj_model:
+    _target_: src.models.attn_v1_module.AttnProjection
+    input_dim: 768
+    n_heads: 4
+    output_length: 16
+
+  pred_model:
+    _target_: src.models.attn_v1_module.BiAttnPrediction
+    input_dim: 768
+    n_heads: 4
+
+data:
+  bert_model: bert-base-uncased
+  seed: 42
+  batch_size: 64
+  tool_capacity: 16
